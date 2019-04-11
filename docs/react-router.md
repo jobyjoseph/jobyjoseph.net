@@ -125,7 +125,7 @@ That is not something which we expected. We expected only second line.
 
 This happened because when React matches a path, it will start from first character. So in our case our path is `/about`. React will then check if there is any paths defined for `/`. Yes there is. Thats why it showed `Home` component. Then it will check if there is any path starting with `/a`, then `/ab`. Like that when it reached `/about`, it got a match. Based on that match, React Router rendered `About` component also. How can we solve this?
 
-There is an attribute for `Route` which `exact`. Setting `exact` to `true` will render a component only if it finds an exact match.
+There is an attribute for `Route` which is `exact`. Setting `exact` to `true` will render a component only if it finds an exact match.
 
 ```javascript
 const routes = (
@@ -143,4 +143,99 @@ Now `Home` component is rendered if the path is exactly `/`. Now the output will
 
 ```
 This is about page
+```
+
+## Setting 404 Page
+
+404 stands for the error code if a requested page is not found. In case of React Router client side routing, we so far saw how to render different components based on the router paths. But we have not handled the case when user types an invalid path in browser.
+
+In the previous code, what will happen if user requested for `/gallery` path? It will be a blank page since no components are mapped to `/gallery` path.
+
+Instead of showing a blank page, let us try to render a custom page for all _404 page not found_ cases.
+
+First, let us create a component to be shown for 404 pages.
+
+```javascript
+const NotFound = () => <div>This is 404 page</div>;
+```
+
+Next, we need to add `Route` for 404 page. Here is the updated code with 404 route.
+
+```javascript
+const routes = (
+  <BrowserRouter>
+    <div>
+      <Route path="/" component={Home} exact={true} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      <Route component={NotFound} />
+    </div>
+  </BrowserRouter>
+);
+```
+
+`path` attribute of `Route` is optional. Since we added _NotFound_ route as the last line out of all routes, it acts as a catch all bucket. So if we request for a path like `/gallery`, it did not make a match in the first 3 Routes. The 4th Route without `path` attribute will take all paths. For the same reason `NotFound` component will be rendered in browser as follows.
+
+```
+This is 404 page
+```
+
+Even though it seems to work, there is a problem. Let us try visiting our `/about` page. It now shows following content in browser.
+
+```
+This is about page
+This is 404 page
+```
+
+What happened is React Router got a match in second Route(`<Route path="/about" component={About} />`) and also in 4th Route(<Route component={NotFound} />). Is there a way to tell React Router to stop at first match? Yes. It is by using `<Switch>`.
+
+`<Switch>` is also another component defined in `react-router-dom`. To use it, we need to modify our import statement.
+
+```javascript
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+```
+
+Next, we need to wrap all our `Route` components inside `<Switch>`.
+
+```javascript
+const routes = (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" component={Home} exact={true} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      <Route component={NotFound} />
+    </Switch>
+  </BrowserRouter>
+);
+```
+
+Now if you remember in the previous section of this article, We learned that the `<div>` tag was used inside `BrowserRouter` for the sake of having just one node inside `BrowserRouter`. Since now we have `<Switch>` tag to wrap, let us replace `<div>` with `<Switch>`.
+
+When `Route`s are wrapped inside `Switch`, if a match is found then further routes are discarded. So, in our case when a match is found for `/about`, React Router will show the `About` component and will not go to `NotFound` route.
+
+We have successfully implemented _Page Not Found_ page. Just in case if you are wondering how my `app.js` file looks like now, here it is.
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+const Home = () => <div>This is home page</div>;
+const About = () => <div>This is about page</div>;
+const Contact = () => <div>This is contact page</div>;
+const NotFound = () => <div>This is 404 page</div>;
+
+const routes = (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" component={Home} exact={true} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      <Route component={NotFound} />
+    </Switch>
+  </BrowserRouter>
+);
+
+ReactDOM.render(routes, document.getElementById("app"));
 ```
