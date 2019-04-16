@@ -237,3 +237,116 @@ const routes = (
 
 ReactDOM.render(routes, document.getElementById("app"));
 ```
+
+## Linking Routes
+
+So far we successfully defined the routes for `/`, `/about`, `/contact` pages. We also handled _404 page not found_ case. Till now we were verifying all routes by directly typing the full path in browser address bar. Now, let us give a link from _Home_ page to _About_ page. Let us modify the JSX of home page to:
+
+```javascript
+const Home = () => (
+  <div>
+    <div>This is home page</div>
+    <a href="/about">About</a>
+  </div>
+);
+```
+
+This brings a new link to home page. When clicking on that link, it will take us to _About_ page.
+
+Even though the navigation worked successfully, we can see that the full page is reloaded when we move to _About_ page. This is because as soon as the browser saw the `href` tag, it created a new request to server. Our `webpack-dev-server` is configured to serve only `index.html` for what ever input requests. So it served `index.html` to browser. Browser then, with the help of React Router identified `/about` path and rendered `About` component.
+
+Why the browser is taking the unnecessary long route? It could have simply shown the `About` component which is already there in the browser. right? For that, we need to override the default behaviour of `href` attribute of `<a>` tag. We need to write code to show the content without full page reload.
+
+React Route makes things easy. It has got a `Link` component for us to easily implement client-side routing. To use it, we need to first import it from `react-router-dom` package.
+
+```javascript
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+```
+
+Using `Link` is easy. In our home component, we just to have to replace `<a>` tag and use `<Link>` tag.
+
+```javascript
+const Home = () => (
+  <div>
+    <div>This is home page</div>
+    <Link to="/about">About</Link>
+  </div>
+);
+```
+
+Now from the home page, try clicking on _About_ link. It will smoothly navigate to about page without full page reload. In the backend `<Link>` component is managing all client-side routing for us. As you might have observed, `to` attribute takes the target link when using `<Link>`. We can still use `<a/>` tag in cases where we need to link to an external site or to a path which is not part of our client-side routing.
+
+## Header for Our Site
+
+With the knowledge acquired so far, let us try to have a `<header />` section for our site. We are going to add a header section to all pages. For that first let us create the header component.
+
+```javascript
+const Header = () => (
+  <div>
+    <h1>My Site</h1>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/contact">Contact</Link>
+    </div>
+  </div>
+);
+```
+
+Now we need to add this header to all pages. For that, instead of pasting `<Header/>` in all page components, we can add directly inside `<BrowserRouter />` component.
+
+```javascript
+const routes = (
+  <BrowserRouter>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/" component={Home} exact={true} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
+```
+
+Since `<Header/>` is added outside of `<Switch/>` it will be rendered in all pages. Earlier we added a link from `home` page to `about` page using `<Link />`. Now that link is not required, since we have a common header with links to all pages. Here is the final code with the new header and all links.
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+
+const Header = () => (
+  <div>
+    <h1>My Site</h1>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/contact">Contact</Link>
+    </div>
+  </div>
+);
+
+const Home = () => <div>This is home page</div>;
+const About = () => <div>This is about page</div>;
+const Contact = () => <div>This is contact page</div>;
+const NotFound = () => <div>This is 404 page</div>;
+
+const routes = (
+  <BrowserRouter>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/" component={Home} exact={true} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
+
+ReactDOM.render(routes, document.getElementById("app"));
+```
