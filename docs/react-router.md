@@ -51,7 +51,7 @@ Let us assume we have an `app.js` which contains the root component. We are goin
 import { BrowserRouter, Route } from "react-router-dom";
 ```
 
-`BrowserRouter` is used once to create a new router. `Route` is used for defining routes for each pages. For that we will provide `Route` with path to match for, like _/about_ and what action to take when user visits that path.
+`BrowserRouter` is used once to create a new router. `Route` is used for defining routes for each pages. For that we will provide `Route` with path to match for, like _/about_ and which component to be rendered when user visits that path.
 
 In our `app.js` file, let us define a constant `routes` which contains the `<BrowserRouter>` component.
 
@@ -61,7 +61,7 @@ const routes = <BrowserRouter>{/* Routes to be defined*/}</BrowserRouter>;
 ReactDOM.render(routes, document.getElementById("app"));
 ```
 
-As we can see, we are just rendering `<BrowserRouter>` component inside app container. Let us now see how to define different routes inside `<BrowserRouter>`. Just for understanding purpose, we have 3 functional components one for home page, about page and contact page.
+As we can see, we are just rendering `<BrowserRouter>` component inside app container. Let us now see how to define different routes inside `<BrowserRouter>`. Before defining routes, let us keep different page components ready. Just for understanding purpose, we have 3 functional components one for home page, about page and contact page.
 
 ```javascript
 const Home = () => <div>This is home page</div>;
@@ -99,7 +99,7 @@ Now as expected, when we visit `/` path, it will render `Home` component. But wh
 Cannot GET /about
 ```
 
-What happens here is, I am depending on `webpack-dev-server` to serve web pages. As soon the browser receives a new url request, ie `/about`, it will try to fetch that content from server. But in server, there is no path defined for `/about`. So we need to tell `webpack-dev-server` that we are planning to use HTML5 history API. For that update the dev-server configuration section in `webpack.config.js` as follows.
+What happens here is, I am depending on `webpack-dev-server` to serve web pages. As soon the browser receives a new url request, ie `/about`, it will try to fetch that content from server. But in server, there is no path defined for `/about`. So we need to tell `webpack-dev-server` that we are planning to use HTML5 history API. For that, update the `devServer` configuration section in `webpack.config.js` as follows.
 
 ```javascript
 devServer: {
@@ -110,7 +110,7 @@ devServer: {
 
 `historyApiFallback` tells `webpack-dev-server` that we are going to manage routing from client side. Now if `webpack-dev-server` does not find any url, it will serve `index.html` instead of 404 error. `index.html`, with the help of React Router can correctly show the component defined.
 
-> Above webpack-dev-server issue is applicable only during development. Also, after making any change in the `webpack.config.js` file, we need restart the server.
+> Above webpack-dev-server issue is applicable only during development. Also, after making any change in the `webpack.config.js` file, we need to restart the server.
 
 With the above modifications done, let us visit `/about` path. Now it will show following in the browser.
 
@@ -185,7 +185,7 @@ This is about page
 This is 404 page
 ```
 
-What happened is React Router got a match in second Route(`<Route path="/about" component={About} />`) and also in 4th Route(<Route component={NotFound} />). Is there a way to tell React Router to stop at first match? Yes. It is by using `<Switch>`.
+What happened is React Router got a match in second Route(`<Route path="/about" component={About} />`) and also in 4th Route(`<Route component={NotFound} />`). Is there a way to tell React Router to stop at first match? Yes. It is by using `<Switch>`.
 
 `<Switch>` is also another component defined in `react-router-dom`. To use it, we need to modify our import statement.
 
