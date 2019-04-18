@@ -350,3 +350,87 @@ const routes = (
 
 ReactDOM.render(routes, document.getElementById("app"));
 ```
+
+## Easy Navigation Links
+
+Our site header now have 3 links. Those links are created using `<Link>` components. Now, as we see in normal menus, I want to give a different style to the header link based on the current page. So, if the page is _About_ page, an `active` class should be added to `About` link.
+
+Implementing this functionality using `<Link>` might require some effort. But there is already a component in `react-router-dom` called `<NavLink>` which serves this purpose.
+
+To use `<NavLink>`, first we need to import it from `react-router-dom`.
+
+```javascript
+import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
+```
+
+Then replace all our `<Link>` tags in header to `<NavLink>`. `<NavLink>` supports a property called `activeClassName`. It can have a class name as its value. So let us give `active` as the value. Here is our header component now:
+
+```javascript
+const Header = () => (
+  <div>
+    <h1>My Site</h1>
+    <div>
+      <NavLink to="/" activeClassName="active">
+        Home
+      </NavLink>
+      <NavLink to="/about" activeClassName="active">
+        About
+      </NavLink>
+      <NavLink to="/contact" activeClassName="active">
+        Contact
+      </NavLink>
+    </div>
+  </div>
+);
+```
+
+Now when we try to visit the `Contact` page, the header HTML looks like this:
+
+```html
+<div>
+  <a aria-current="page" class="active" href="/">Home</a>
+  <a href="/about">About</a>
+  <a aria-current="page" class="active" href="/contact">Contact</a>
+</div>
+```
+
+Notice that both `Home` and `Contact` menu items have `active` class. This is a similar situation we faced earlier. To solve this, we can use `exact` attribute of `<NavLink>`. We can now update the `<NavLink>` for `Home` with `exact` attribute.
+
+```javascript
+<NavLink to="/" activeClassName="active" exact={true}>
+  Home
+</NavLink>
+```
+
+That solves our multiple `active` class issue. Now if we visit `/contact` page, `active` class is applied to only Contact menu item.
+
+Now we know how to `<NavLink>` component.
+
+## Handling Query Strings and Hash
+
+We learned so far how React Router renders different component based on the path rules. When React Router renders these components, it is also rendering few helpful values through `props`.
+
+In order to understand this, let us modify our `Contact` component so that it just prints all the contents of `props` in `console`.
+
+```javascript
+const Contact = props => {
+  console.log(props);
+  return <div>This is contact page</div>;
+};
+```
+
+All our other code remains same. Already React Router was passing some useful values when it renders a component. But we were not aware about it. Now when we visit contact page, we can see a list of objects and properties related to route information.
+
+[image]
+
+Now we know that all route related information is coming through the `props`. It just a matter of finding where our needed values are. Any query string parameters can be identified from:
+
+```
+props.location.search
+```
+
+If our url contains a hash like `/contact#address`, the hash value can be read from:
+
+```
+this.location.hash
+```
