@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   title: "Joby Joseph", // Title for your website.
-  tagline: "My Learnings and Experience",
+  tagline: "Sharing is fun",
   url: "https://jobyjoseph.net", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -37,20 +37,20 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [{ doc: "components", label: "React" }],
+  headerLinks: [{ doc: "react/components", label: "React" }],
 
   // If you have users set above, you add it here:
   users,
 
   /* path to images for header/footer */
-  headerIcon: "img/docusaurus.svg",
-  footerIcon: "img/docusaurus.svg",
+  headerIcon: "img/logo.svg",
+  footerIcon: "img/logo.svg",
   favicon: "img/favicon.png",
 
   /* Colors for website */
   colors: {
-    primaryColor: "#2E8555",
-    secondaryColor: "#205C3B"
+    primaryColor: "#304152",
+    secondaryColor: "#FDCE4B"
   },
 
   /* Custom fonts for website */
@@ -68,7 +68,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Your Name or Your Company Name`,
+  copyright: `Copyright © ${new Date().getFullYear()} Joby Joseph`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
