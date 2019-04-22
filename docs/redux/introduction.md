@@ -186,3 +186,24 @@ store.dispatch({
 
 console.log(store.getState()); // {numberOfItemsInCart: 1}
 ```
+
+As you can see, more the action types, more the number of if...else statements in `createStore()`. We can modify it by using `switch` statement instead of `if...else`. So here is the updated `createStore()` section.
+
+```javascript
+const store = createStore((state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart + 1
+      };
+      break;
+    case "DECREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart - 1
+      };
+      break;
+    default:
+      return state;
+  }
+});
+```
