@@ -37,7 +37,10 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [{ doc: "react/components", label: "React" }],
+  headerLinks: [
+    { doc: "react/components", label: "React" },
+    { doc: "javascript/destructuring", label: "JavaScript" }
+  ],
 
   // If you have users set above, you add it here:
   users,

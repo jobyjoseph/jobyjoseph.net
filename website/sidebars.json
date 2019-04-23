@@ -1,5 +1,7 @@
 {
-  "docs": {
-    "Docusaurus": ["intro"]
+  "sidebar": {
+    "JavaScript": ["javascript/destructuring"],
+    "React": ["react/components", "react/react-router"],
+    "Redux": ["redux/introduction"]
   }
 }

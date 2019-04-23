@@ -76,7 +76,7 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
   render() {
     const { config: siteConfig, language = "" } = this.props;
-    const { baseUrl } = siteConfig;
+    const { baseUrl, docsUrl } = siteConfig;
 
     const Block = props => (
       <Container
@@ -191,9 +191,41 @@ class Index extends React.Component {
     };
 
     return (
-      <div>
-        <HomeSplash siteConfig={siteConfig} language={language} />
-      </div>
+      <Container padding="top">
+        <div>
+          <h3>JavaScript</h3>
+          <ul>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/javascript/destructuring`}>
+                Destructuring
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>React</h3>
+          <ul>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/react/components`}>Components</a>
+            </li>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/react/react-router`}>
+                React Router
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Redux</h3>
+          <ul>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/redux/introduction`}>
+                Introduction
+              </a>
+            </li>
+          </ul>
+        </div>
+      </Container>
     );
   }
 }
