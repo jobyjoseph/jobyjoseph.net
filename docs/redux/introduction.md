@@ -207,3 +207,146 @@ const store = createStore((state = initialState, action) => {
   }
 });
 ```
+
+### Dispatch Dynamic Actions
+
+So far, we saw dispatching of actions with just `type` property. Currently, the cart count is increased or decreased by 1 in each action dispatch. What if we need to increment or decrement the cart count by the number we provide? We can provide extra information in action.
+
+Let us modify `INCREMENT_CART_COUNT` and `DECREMENT_CART_COUNT`, so that they take dynamic count from us to update the cart.
+
+```javascript
+store.dispatch({
+  type: "INCREMENT_CART_COUNT",
+  count: 5
+});
+
+store.dispatch({
+  type: "DECREMENT_CART_COUNT",
+  count: 3
+});
+```
+
+As you can see, we are providing one more property in the _Action_ object. The extra property `count` is going to be used later to increase or decrease the cart count.
+
+Next, inside `createStore()` we can access the `count` just like we accessed `type`.
+
+```javascript
+const store = createStore((state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart + action.count
+      };
+      break;
+    case "DECREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart - action.count
+      };
+      break;
+    default:
+      return state;
+  }
+});
+```
+
+We replaced `1` with `action.count`. Now, as you might have guessed, the increment action increases the cart count by 5 and decrement action decreases the count by 3.
+
+```javascript
+console.log(store.getState()); // {numberOfItemsInCart: 0}
+
+store.dispatch({
+  type: "INCREMENT_CART_COUNT",
+  count: 5
+});
+
+store.dispatch({
+  type: "DECREMENT_CART_COUNT",
+  count: 3
+});
+
+console.log(store.getState()); // {numberOfItemsInCart: 2}
+```
+
+## Subscribe to Store
+
+So far we printed the value of current store state using `store.getState()`. Can we have an automatic system, which performs something when the store state changes? In Redux we can do that by subscribing to the store.
+
+```javascript
+import { createStore } from "redux";
+
+const initialState = {
+  numberOfItemsInCart: 0
+};
+
+const store = createStore((state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart + 1
+      };
+      break;
+    case "DECREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart - 1
+      };
+      break;
+    default:
+      return state;
+  }
+});
+
+store.subscribe(() => {
+  console.log("I am called");
+  console.log(store.getState());
+});
+
+store.dispatch({
+  type: "INCREMENT_CART_COUNT"
+});
+
+store.dispatch({
+  type: "INCREMENT_CART_COUNT"
+});
+
+store.dispatch({
+  type: "DECREMENT_CART_COUNT"
+});
+```
+
+A big code. right? But only the `store.subscribe()` portion is new. Rest all code are covered in previous sections. Now by `store.subscribe()`, we are telling Redux to execute a set of code if the state is changed.
+
+In the above code, after subscribing, the store state is changed 3 times due to dispatch of 3 actions. So in the console we can find 3 "I am called" messages. What if, we are placing the subscribe() call in between the dispatch statements?
+
+```javascript
+store.dispatch({
+  type: "INCREMENT_CART_COUNT"
+});
+
+store.dispatch({
+  type: "INCREMENT_CART_COUNT"
+});
+
+store.subscribe(() => {
+  console.log("I am called");
+  console.log(store.getState());
+});
+
+store.dispatch({
+  type: "DECREMENT_CART_COUNT"
+});
+```
+
+This will print `I am called` only once. This is because we told Redux to listen to state change only after the first two dispatches. So the third dispatch fired the event.
+
+### Unsubscribe
+
+When we add `subscribe()`, we start listening to change in store state. If we need to stop listening, we need to use `unsubscribe()`. For that, we need to store the returned value of `subscribe()` method. The returned value is a function, which can be called to unsubscribe.
+
+```javascript
+const unsubscribe = store.subscribe(() => {
+  console.log("I am called");
+  console.log(store.getState());
+});
+
+unsubscribe();
+```
