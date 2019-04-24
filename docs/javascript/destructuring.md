@@ -114,3 +114,17 @@ const { model: mymodel = "No Model" } = car;
 ```
 
 ## Array Destructuring
+
+Just like object destructuring helped us to pull out the elements of an object, Array destructuring helps us to pull out elements of an Array.
+
+```javascript
+const fruits = ["Apple", "Banana", "Peach", "Pineapple"];
+const [a, b] = fruits;
+console.log(a, b); // Apple Banana
+```
+
+Here we have a `fruits` array with 4 elements. We then extracted first 2 fruits to `a` and `b`. Notice the `[]` syntax instead of `{}`. That is one difference compared to object destructuring. Also, we can use any variable names because here the elements are mapped based on their order inside the array. In the above case, since we gave only 2 variables, first 2 fruits are assigned to `a` and `b`.
+
+### Skipping Array Elements
+
+In the earlier code snippet, since we supplied only 2 variables for destructuring, first 2 fruits were copied. What if we need the first and fourth fruit to be assigned to `a` and `b`. We can skip elements by putting commas.
