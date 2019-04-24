@@ -112,3 +112,5 @@ We learned about setting a default value and also about renaming a variable. We 
 ```javascript
 const { model: mymodel = "No Model" } = car;
 ```
+
+## Array Destructuring
