@@ -70,6 +70,8 @@ const siteConfig = {
   },
   */
 
+  gaTrackingId: "UA-134343404-1",
+
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} Joby Joseph`,
 

@@ -128,3 +128,21 @@ Here we have a `fruits` array with 4 elements. We then extracted first 2 fruits 
 ### Skipping Array Elements
 
 In the earlier code snippet, since we supplied only 2 variables for destructuring, first 2 fruits were copied. What if we need the first and fourth fruit to be assigned to `a` and `b`. We can skip elements by putting commas.
+
+```javascript
+const fruits = ["Apple", "Banana", "Peach", "Pineapple"];
+const [a, , , b] = fruits;
+console.log(a, b); // Apple Pineapple
+```
+
+### Setting Defaults
+
+Just like we set defaults in case of object destructuring, we can set default values in array destructuring.
+
+```javascript
+const fruits = ["Apple", "Banana"];
+const [a, b, c = "Other"] = fruits;
+console.log(c); // Other
+```
+
+In the example above `fruits` array have only 2 elements. So `c` is assigned with `undefined` if default assignment is not present. But since we have set a default value, `c` has the value `"Other"`.

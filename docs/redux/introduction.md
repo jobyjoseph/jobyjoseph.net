@@ -66,7 +66,7 @@ The upper case used for `type` value is just for convention.
 
 ### Dispatching Action
 
-So far we only learned that _Action_ is an object. Now how can we implment an action? Or how can we tell the store that we need to perform an action? The `store` object earlier recevied has a method called `dispatch()`. We use that method to dispatch an action.
+So far we only learned that _Action_ is an object. Now how can we implment an action? Or how can we tell the store that we need to perform an action? The `store` object earlier received has a method called `dispatch()`. We use that method to dispatch an action.
 
 ```javascript
 store.dispatch({
@@ -267,6 +267,37 @@ store.dispatch({
 console.log(store.getState()); // {numberOfItemsInCart: 2}
 ```
 
+## Reducers
+
+So far we have been using a function to update the state of Redux store. This function was supplied to `createStore()` as an argument. This function is called a **Reducer** function in Redux. Let us take out the anonymous function and create a separate Reducer function.
+
+```javascript
+// ...
+const countReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart + action.count
+      };
+      break;
+    case "DECREMENT_CART_COUNT":
+      return {
+        numberOfItemsInCart: state.numberOfItemsInCart - action.count
+      };
+      break;
+    default:
+      return state;
+  }
+};
+
+const store = createStore(countReducer);
+// ...
+```
+
+As you might be already knowing, Reducer decides how to update the state based on the action. Another point to note is, Reducers are **pure functions**. That means, output of a reducer function is purely defined by the inputs passed to it. A pure function does not use variables outside of its scope or update variables outside of its scope.
+
+A reducer should not directly edit the `state` or `action` object. It can cause undesired effect.
+
 ## Subscribe to Store
 
 So far we printed the value of current store state using `store.getState()`. Can we have an automatic system, which performs something when the store state changes? In Redux we can do that by subscribing to the store.
@@ -278,22 +309,24 @@ const initialState = {
   numberOfItemsInCart: 0
 };
 
-const store = createStore((state = initialState, action) => {
+const countReducer = (state = initialState, action) => {
   switch (action.type) {
     case "INCREMENT_CART_COUNT":
       return {
-        numberOfItemsInCart: state.numberOfItemsInCart + 1
+        numberOfItemsInCart: state.numberOfItemsInCart + action.count
       };
       break;
     case "DECREMENT_CART_COUNT":
       return {
-        numberOfItemsInCart: state.numberOfItemsInCart - 1
+        numberOfItemsInCart: state.numberOfItemsInCart - action.count
       };
       break;
     default:
       return state;
   }
-});
+};
+
+const store = createStore(countReducer);
 
 store.subscribe(() => {
   console.log("I am called");
@@ -301,15 +334,18 @@ store.subscribe(() => {
 });
 
 store.dispatch({
-  type: "INCREMENT_CART_COUNT"
+  type: "INCREMENT_CART_COUNT",
+  count: 5
 });
 
 store.dispatch({
-  type: "INCREMENT_CART_COUNT"
+  type: "INCREMENT_CART_COUNT",
+  count: 5
 });
 
 store.dispatch({
-  type: "DECREMENT_CART_COUNT"
+  type: "DECREMENT_CART_COUNT",
+  count: 3
 });
 ```
 
@@ -319,11 +355,13 @@ In the above code, after subscribing, the store state is changed 3 times due to 
 
 ```javascript
 store.dispatch({
-  type: "INCREMENT_CART_COUNT"
+  type: "INCREMENT_CART_COUNT",
+  count: 5
 });
 
 store.dispatch({
-  type: "INCREMENT_CART_COUNT"
+  type: "INCREMENT_CART_COUNT",
+  count: 5
 });
 
 store.subscribe(() => {
@@ -332,7 +370,8 @@ store.subscribe(() => {
 });
 
 store.dispatch({
-  type: "DECREMENT_CART_COUNT"
+  type: "DECREMENT_CART_COUNT",
+  count: 3
 });
 ```
 
