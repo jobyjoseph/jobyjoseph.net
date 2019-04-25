@@ -389,3 +389,78 @@ const unsubscribe = store.subscribe(() => {
 
 unsubscribe();
 ```
+
+## `combineReducers`
+
+So far we covered 4 basic things on Redux. They are _Actions_, _Reducers_, _Store_, _Subscription_. Now when the application size is getting bigger, we require `combineReducers`.
+
+Assume our store state might look like this:
+
+```javascript
+const state = {
+  todoItems: [
+    {
+      id: 1,
+      description: "Buy Groceries"
+    }
+    // ...
+  ],
+  users: [
+    {
+      uid: 1001,
+      name: "Mark Doe"
+    }
+    // ...
+  ],
+  options: {
+    theme: "Dark",
+    deleteCompleted: true
+  }
+};
+```
+
+At first glance itself, we know that there can come functionalities like _Add Item_, _Edit Item_, _Add User_ and so on. Defining a single reducer which manage the entire app is difficult. Instead pickup the key entities which are `todoItems`, `users` and `options`. Then write reducers which affects only those entities.
+
+```javascript
+const initialTodoItemState = [];
+const todoItemReducer = (state = initialTodoItemState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+      break;
+  }
+};
+
+const initialUserState = [];
+const userReducer = (state = initialUserState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+      break;
+  }
+};
+
+const initialOptionsState = {
+  theme: "Dark",
+  deleteCompleted: true
+};
+const optionsReducer = (state = initialOptionsState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+      break;
+  }
+};
+```
+
+Now we know these are 3 different reducers. But how can we unite it to make one reducer and supply to `createStore()`. For that, import `combineReducers` from `redux` package. And then use it like below:
+
+```javascript
+const store = createStore(
+  combineReducers({
+    todoItems: todoItemReducer,
+    users: userReducer,
+    options: optionsReducer
+  })
+);
+```
