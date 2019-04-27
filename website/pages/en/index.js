@@ -200,6 +200,11 @@ class Index extends React.Component {
                 Destructuring
               </a>
             </li>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/javascript/spread-operator`}>
+                Spread Operator
+              </a>
+            </li>
           </ul>
         </div>
         <div>

@@ -1,6 +1,6 @@
 {
   "sidebar": {
-    "JavaScript": ["javascript/destructuring"],
+    "JavaScript": ["javascript/destructuring", "javascript/spread-operator"],
     "React": ["react/components", "react/react-router"],
     "Redux": ["redux/introduction"]
   }

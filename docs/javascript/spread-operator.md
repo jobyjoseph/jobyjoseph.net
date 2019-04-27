@@ -19,15 +19,27 @@ Spread operator looks like this: `...`. If you see the spread operator with an a
 
 ### Add New Elements to Array
 
+We need to add 2 more elements `3` and `5` to our `cards` array and return a new array. Using spread operator it is written like this.
+
+```javascript
+const newCards = [...cards, 3, 5];
+```
+
 ### Copy Elements of an Array
+
+We can easily do a shallow copy of one array to another.
+
+```javascript
+const cardsCopy = [...cards];
+```
 
 ## Spreading Objects
 
-Spread operator when used with objects helps to extract the different elements of an object. At the time of writing, this is a new feature. Spread operator with objects was added in ES9.
+Spread operator when used with objects helps to extract the different elements of an object. At the time of writing, this is a new feature. Spread operator with objects was added in ES9. We can do many tasks quickly using spread operator like copying objects and adding new properties.
 
 ### Shallow Copy an Object
 
-We have an object with 3 elements.
+We can use spread operator to shallow copy an object. Here, we have an object with 3 elements.
 
 ```javascript
 const car = {
