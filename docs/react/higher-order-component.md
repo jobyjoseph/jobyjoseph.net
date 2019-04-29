@@ -9,7 +9,7 @@ A Higher Order Component(HOC) renders another component. It might seem strange o
 
 Imagine we are going to create many reusable react components which other developers can use. Assume that the components below are a _Slider_ component and _Carousel_ component created by us.
 
-```javascript
+```jsx
 const Slider = () => <h1>This is a Slider</h1>;
 
 const Carousel = () => <h1>This is a Carousel</h1>;
@@ -17,7 +17,7 @@ const Carousel = () => <h1>This is a Carousel</h1>;
 
 Now, say our product name is _ReactPack_. So we would like to add the branding message in every component we provide.
 
-```javascript
+```jsx
 const Slider = () => (
   <div>
     <h1>This is a Slider</h1>
@@ -51,7 +51,7 @@ const reactPack = Component => {
 
 Now the returned component is going to wrap the input component. It will also add the branding text while wrapping.
 
-```javascript
+```jsx
 const reactPack = Component => {
   return () => (
     <div>
@@ -64,7 +64,7 @@ const reactPack = Component => {
 
 We can then use the `Slider` component by calling `reactPack(Slider)`. Here is the complete code.
 
-```javascript
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 
