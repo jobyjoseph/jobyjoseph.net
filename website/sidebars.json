@@ -1,7 +1,17 @@
 {
   "sidebar": {
-    "JavaScript": ["javascript/destructuring", "javascript/spread-operator"],
-    "React": ["react/components", "react/react-router"],
-    "Redux": ["redux/introduction"]
+    "JavaScript": [
+      "javascript/index",
+      "javascript/destructuring",
+      "javascript/spread-operator"
+    ],
+    "React": [
+      "react/index",
+      "react/components",
+      "react/higher-order-component",
+      "react/react-router",
+      "react/react-with-redux"
+    ],
+    "Redux": ["redux/index"]
   }
 }
