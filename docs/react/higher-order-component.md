@@ -131,3 +131,31 @@ ReactDOM.render(
 ```
 
 We just learned how to handle props when dealing with Higher Order Components.
+
+## Passing Additional props
+
+In the previous section we saw how the parent Higher Order Component passed the `props` to child component. The higher order component can also pass additional info to child props.
+
+Here is a child component which we have created which renders some html if the user is authenticated.
+
+```jsx
+const Profile = props => (
+  <div>
+    {props.name} is {props.age} years old.
+    {props.isAuthenticated && <p>I am logged in</p>}
+  </div>
+);
+```
+
+Now the Higher Order Component contains the logic to check if user is authenticated or not. The HOC then can pass that info to child component as shown below.
+
+```jsx
+const generateHOC = WrappedComponent => {
+  return props => (
+    <div>
+      <WrappedComponent {...props} isAuthenticated={true} />
+      <p>From HOC</p>
+    </div>
+  );
+};
+```
