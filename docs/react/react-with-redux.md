@@ -31,4 +31,4 @@ const app = (
 ReactDOM.render(app, document.getElementById("app"));
 ```
 
-Then our earlier root component `<App />` is wrapped inside `<Provider />`. We also need to pass the redux store as a property to `<Provider />`.
+Then our earlier root component `<App />` is wrapped inside `<Provider />`. We also need to pass the redux store as a property to `<Provider />`. Now all the child components of `<App />` can access `store` data directly. We will see how.
