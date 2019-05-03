@@ -32,3 +32,27 @@ ReactDOM.render(app, document.getElementById("app"));
 ```
 
 Then our earlier root component `<App />` is wrapped inside `<Provider />`. We also need to pass the redux store as a property to `<Provider />`. Now all the child components of `<App />` can access `store` data directly. We will see how.
+
+## Connecting a Component with Redux Store
+
+When a component is wrapped inside `<Provider />`, we know that the component can access the store. Let us create a component that requires data from store.
+
+Let us create a new component `TodoList`.
+
+```jsx
+import React from "react";
+
+const TodoList = () => {
+  return <h1>TodoList</h1>;
+};
+
+export default TodoList;
+```
+
+Next, there is a method `connect()` inside `react-redux` package. Let us import it.
+
+```jsx
+import { connect } from "react-redux";
+```
+
+`connect()` is a function that returns another function. The returned function then returns a Higher Order Component which injects more data to the child component.
