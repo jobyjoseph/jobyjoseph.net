@@ -2,6 +2,7 @@
   "sidebar": {
     "JavaScript": [
       "javascript/index",
+      "javascript/objects",
       "javascript/destructuring",
       "javascript/spread-operator"
     ],
