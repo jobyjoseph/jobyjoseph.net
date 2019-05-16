@@ -64,3 +64,72 @@ const config = {
   password: "pass123"
 };
 ```
+
+## Reading an Object properties
+
+As we already discussed, object is a collection of related information. We have an object here `student` with some properties and method.
+
+```javascript
+const student = {
+  name: "Joby",
+  course: "Computer Science",
+  subject1Mark: 92,
+  subject2Mark: 89,
+  subject3Mark: 91,
+  getAverageMark: function() {
+    return (this.subject1Mark + this.subject2Mark + this.subject3Mark) / 3;
+  }
+};
+```
+
+### Using Dot `.` operator
+
+As you already know, we can use dot(`.`) operator to read the value of an object key. We can read the value of `name` property using `.` operator.
+
+```javascript
+console.log(student.name); // "Joby"
+```
+
+### Using Bracket Notation `[]`
+
+We can also access object properties using `[]` notation.
+
+```javascript
+console.log(student["name"]); // "Joby"
+```
+
+The syntax looks very similar to how we access elements of an array. That is the reason why objects can also be called as **associative arrays**.
+
+#### Usage Scenario:
+
+Sometimes objects have illegal identifier characters in the key.
+
+```javascript
+const person = {
+  "full-name": "Joby Joseph"
+};
+```
+
+`person` is a perfectly legal object. Now if we are trying to get the value of `full-name` using `.` operator, it will not work as expected.
+
+```javascript
+console.log(person.full - name);
+```
+
+In this situation we need to use the bracket syntax.
+
+```javascript
+console.log(person["full-name"]); // "Joby Joseph"
+```
+
+#### Usage Scenario:
+
+Sometimes the key to extract might reside inside a variable. In that case, we use bracket notation `[]`, to get the value. From the above `student` object, if we are printing the marks in a loop, we can do like this.
+
+```javascript
+for (let i = 1; i <= 3; i++) {
+  console.log(student[`subject${i}Mark`]);
+}
+```
+
+Above code will output `92`, `89`, `91` in different lines. Here we used template literal string inside bracket notation.
