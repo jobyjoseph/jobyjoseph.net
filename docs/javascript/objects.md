@@ -20,7 +20,7 @@ An object with no properties or methods inside it is an empty object.
 const car = {};
 ```
 
-### Usage Scenario
+#### Usage Scenario
 
 Say, we are going to create a `student` object. But all the properties of `student` object is not available initially. In that case we start with an empty object at the start of program.
 
@@ -52,7 +52,7 @@ const car = {
 
 In case of strings, we have string literals like `"hello"`, `"apple"` and so on. Object literals are something in similar lines for Objects.
 
-### Usage Scenario
+#### Usage Scenario
 
 In our application, we might need to store the configuration of something as an object literal. The key-value pair will be later used in our application.
 
