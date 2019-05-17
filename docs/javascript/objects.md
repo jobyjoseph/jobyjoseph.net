@@ -133,3 +133,5 @@ for (let i = 1; i <= 3; i++) {
 ```
 
 Above code will output `92`, `89`, `91` in different lines. Here we used template literal string inside bracket notation.
+
+## Setting Object properties
