@@ -134,4 +134,83 @@ for (let i = 1; i <= 3; i++) {
 
 Above code will output `92`, `89`, `91` in different lines. Here we used template literal string inside bracket notation.
 
-## Setting Object properties
+### Reading non-existent property
+
+Say we have an object `car` with two properties `model` and `year`.
+
+```javascript
+const car = {
+  model: "Mercedes GLS",
+  year: 2019
+};
+```
+
+Now we are trying to get the value of a property `color` which is not in `car` object. Will it throw an error? No. Instead it will return `undefined`.
+
+```javascript
+console.log(car.color); // undefined
+```
+
+## Setting Object Properties
+
+We saw that we can read properties of an object either using dot(`.`) operator or using bracket notation`[]`. We can use the same operators to add / edit properties of an object. Here, we have an object `car`.
+
+```javascript
+const car = {
+  model: "Mercedes GLS",
+  year: 2019
+};
+```
+
+### Adding new property
+
+In JavaScript, we can dynamically create new properties or methods for an object. It can be done by just setting it. In `car` object, there is no `color` property. We can create it by just setting `color` property.
+
+```javascript
+car.color = "Black";
+```
+
+Now the `car` object looks like:
+
+```javascript
+{
+  model : "Mercedes GLS",
+  year : 2019,
+  color : "Black"
+}
+```
+
+In the above code, we created a new property `color` using dot(`.`) notation. Instead, we can also create a new property using bracket notation`[]`. Here is how it is done.
+
+```javascript
+car["color"] = "Black";
+```
+
+### Updating existing property
+
+When we set a property of an object that does not exist, that property is created. If that property exists, then the value of that property is updated. In our `car` object, the `model` and `year` property exists. The value of `year` property is `2019`. Now we are going to set the value of `year` property with a different year.
+
+```javascript
+car.year = 2020;
+```
+
+Now the `year` property is updated. Now the `car` object looks like:
+
+```javascript
+{
+  model : "Mercedes GLS",
+  year : 2020
+}
+```
+
+As in the case of creating a new property, we can also update a property using bracket notation`[]`.
+
+```javascript
+car["year"] = 2020;
+```
+
+> Note that when we used bracket notation, `year` is wrapped in quotes to form a string literal. If we use it without quotes, JavaScript engine will consider it as a variable `year` and will try to resolve it.
+
+### Using bracket notation`[]` to handle dynamic keys
+
+We can use variables inside bracket notation. This can come handy.
