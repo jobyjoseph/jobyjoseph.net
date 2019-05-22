@@ -213,4 +213,25 @@ car["year"] = 2020;
 
 ### Using bracket notation`[]` to handle dynamic keys
 
-We can use variables inside bracket notation. This can come handy.
+We can use variables inside bracket notation. This can come handy. We have a `student` object here.
+
+```javascript
+const student = {
+  name: "Joby",
+  age: 33
+};
+```
+
+What if the student `"Joby"` have a unique property `dreamingAbout`? How can we add that?
+
+```javascript
+let dynamicProperty = "dreamingAbout";
+let dynamicValue = "Riding Mercedes GLS AMG";
+student[dynamicProperty] = dynamicValue;
+```
+
+See how we used variables to add a key value pair for an object. This can be achieved only using bracket notation`[]`. Now the new property is ready to use.
+
+```javascript
+console.log(student.dreamingAbout); // "Riding Mercedes GLS AMG"
+```
