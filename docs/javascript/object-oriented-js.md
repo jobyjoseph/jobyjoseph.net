@@ -12,21 +12,72 @@ Any OOP language supports 4 concepts.
 3. Inheritance
 4. Polymorphism
 
-## Procedural Programming
+## Encapsulation
 
-In Procedural Programming, all the functions and data needed in our program is lying straight in the global space.
+In Object Oriented Programming, we group related variables and methods that operate on them into an object. This is called **encapsulation**.
+
+Say we are working on a banking application. We are adopting a procedural way of writing code.
 
 ```javascript
-let name = "Mercedes";
-function printName() {
-  console.log(name);
+let firstName = "Joby";
+let lastName = "Joseph";
+let age = 33;
+let fixedInterestRate = 9.7;
+
+// Functions
+function getName(fName, lName) {
+  return `${fName} ${lName}`;
 }
-function sum(a, b) {
-  return a + b;
+function isSenior(age) {
+  if (age >= 60) {
+    return true;
+  } else {
+    return false;
+  }
 }
-console.log(sum(2, 3));
+function getFixedInterestAmount(amount, rate) {
+  return (amount * rate) / 100;
+}
+
+// Function Invocation
+console.log(getName(firstName, lastName));
+console.log(isSenior(age));
+console.log(getFixedInterestAmount(1000, fixedInterestRate));
 ```
 
-Here as you can see all functions and variables are just lying around. It is not possible to group them to address a particular functionality.
+There are two main modules where we are working, _Employee_ module and _Banking_ module. But there is no segregation in our coding style. Any function can access any variable. Let us follow encapsulation principle to group these functionalities. We are going to create two objects for the two modules.
 
-In Object Oriented Programming, we can group related functions and data in an object.
+```javascript
+const employeeModule = {
+  firstName: "Joby",
+  lastName: "Joseph",
+  age: 33,
+  getName: function() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  isSenior: function() {
+    if (this.age >= 60) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+const bankingModule = {
+  fixedInterestRate: 9.7,
+  getFixedInterestAmount: function(amount) {
+    return (amount * this.fixedInterestRate) / 100;
+  }
+};
+
+console.log(employeeModule.getName());
+console.log(employeeModule.isSenior());
+console.log(bankingModule.getFixedInterestAmount(1000));
+```
+
+## Abstraction
+
+When the complexities of a module is hidden from the user, it is called **Abstraction**.
+
+In the above section, we are using a `fixedInterestRate` property inside `bankingModule`. It is now wrapped inside `bankingModule` object. Therefore `fixedInterestRate` variable is now not available in global scope, there by reducing polluting global scope.
