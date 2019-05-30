@@ -3,11 +3,57 @@ id: callbacks
 title: Callbacks
 ---
 
-A function that receives another function as its argument is called **Higher Order Function**. The function that is passed to Higher Order Function is called **callback**.
+**Callbacks** are functions that are passed as arguments to another functions. A function that receives a callback function as its argument is called **Higher Order Function**.
 
-We were using callbacks in lot of places without even knowing they were callbacks. Callbacks are used in Array.map(), \_.filter, Button onClick event handler and so on.
+```javascript
+function callback(name) {
+  console.log(`Hi, ${name}`);
+}
 
-Callbacks help us to delay the execution of a function to a later point in time.
+function higherOrderFunction(nameArg, callbackArg) {
+  callbackArg(nameArg);
+}
+
+higherOrderFunction("Joby", callback); // "Hi, Joby"
+```
+
+In the above code snippet, `higherOrderFunction` is a Higher Order Function because it is expecting a function as its second argument. We then supplied a function `callback` to `higherOrderFunction`, which is later invoked.
+
+We were using callbacks in lot of places without even knowing they were callbacks. Let us go through different code snippets where a callback function is involved.
+
+**Array.map()**
+
+The ES6 `map()` method of `Array` object requires a function as its argument. Here is an example.
+
+```javascript
+[2, 4, 5, 7].map(item => console.log(item));
+```
+
+**setTimeout()**
+
+We all are very fluent with this `setTimeout()` method. It is a function that takes a function as its first argument.
+
+```javascript
+setTimeout(() => {
+  console.log("I am ready");
+}, 5000);
+```
+
+Above code prints `"I am ready"` in console after 5 seconds.
+
+**jQuery button click handler**
+
+We use `.on()` method to attach event handlers in jQuery. In order to attach a click event handler to a button with id `myButton`, here is the code in jQuery.
+
+```javascript
+$("#myButton").on("click", function() {
+  console.log("Button clicked");
+});
+```
+
+Here also we are passing a function as second argument to `.on()` method. The second argument which is an anonymous function is also a callback function.
+
+> If you observe the case of `setTimeout()` and button click handler, the passed callback functions are not immediately executed. In case of of `setTimeout()` it is executed only after 5 seconds. In case of click handler, the callback function is executed only when a user clicks on the button. Therefore we can say that callbacks help us to delay the execution of a function to a later point in time.
 
 ## Callback Hell
 
