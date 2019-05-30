@@ -53,7 +53,18 @@ $("#myButton").on("click", function() {
 
 Here also we are passing a function as second argument to `.on()` method. The second argument which is an anonymous function is also a callback function.
 
-> If you observe the case of `setTimeout()` and button click handler, the passed callback functions are not immediately executed. In case of of `setTimeout()` it is executed only after 5 seconds. In case of click handler, the callback function is executed only when a user clicks on the button. Therefore we can say that callbacks help us to delay the execution of a function to a later point in time.
+**AJAX request**
+In jQuery, we can use `$.getJSON()` to do an AJAX call for JSON request. An example code will be:
+
+```javascript
+$.getJSON("ajax/test.json", function(data) {
+  console.log(data);
+});
+```
+
+Here the passed callback function receives response data in `data` variable.
+
+> If you observe the case of `setTimeout()`, button click handler or AJAX request, the passed callback functions are not immediately executed. In case of of `setTimeout()` it is executed only after 5 seconds. In case of click handler, the callback function is executed only when a user clicks on the button. Therefore we can say that callbacks help us to delay the execution of a function to a later point in time.
 
 ## Callback Hell
 
