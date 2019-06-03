@@ -68,4 +68,20 @@ Here the passed callback function receives response data in `data` variable.
 
 ## Callback Hell
 
-Inversion of control
+How can callbacks create a hell like situation? Let us try to understand that. In the following code, we are waiting for the response of a login API.
+
+```javascript
+function codeAfterAJAX() {
+  console.log("Here I continue rest of the functionality");
+}
+
+$.ajax({
+  method: "POST",
+  url: "api/login",
+  data: { username: "John", password: "John123!" }
+}).done(codeAfterAJAX);
+```
+
+Here we make an AJAX call. If the AJAX response come successfully, we execute `codeAfterAJAX` to continue our logic. What if the jQuery AJAX function had some bug and calls the callback function twice? Things might not end well.
+
+So in case of callbacks, we are blindly trusting some code and ask that code to execute a callback when ready. There happens an **inversion of control** in this place. There can be some times when things wont work as expected and create a hell like situation.
