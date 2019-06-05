@@ -82,6 +82,6 @@ $.ajax({
 }).done(codeAfterAJAX);
 ```
 
-Here we make an AJAX call. If the AJAX response come successfully, we execute `codeAfterAJAX` to continue our logic. What if the jQuery AJAX function had some bug and calls the callback function twice? Things might not end well.
+Here we make an AJAX call. If the AJAX response come successfully, we execute `codeAfterAJAX` to continue our logic. What if the jQuery AJAX function had some bug and calls the callback function twice? Or what if the callback is never called? Things might not end well.
 
 So in case of callbacks, we are blindly trusting some code and ask that code to execute a callback when ready. There happens an **inversion of control** in this place. There can be some times when things wont work as expected and create a hell like situation.
