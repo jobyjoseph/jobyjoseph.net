@@ -1,5 +1,5 @@
 ---
-id: objects-basics
+id: objects
 title: Objects Basics
 ---
 
@@ -11,6 +11,8 @@ const car = {
   company: "Mercedes"
 };
 ```
+
+As you can see an object is a collection of key value pairs.
 
 ## Empty Object
 
