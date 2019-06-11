@@ -3,6 +3,7 @@
     "JavaScript": [
       "javascript/index",
       "javascript/objects",
+      "javascript/prototypes",
       "javascript/destructuring",
       "javascript/spread-operator"
     ],
