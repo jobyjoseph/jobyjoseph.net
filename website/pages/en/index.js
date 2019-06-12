@@ -199,6 +199,16 @@ class Index extends React.Component {
               <a href={`${baseUrl}${docsUrl}/javascript/objects`}>Objects</a>
             </li>
             <li>
+              <a href={`${baseUrl}${docsUrl}/javascript/prototypes`}>
+                Prototypes
+              </a>
+            </li>
+            <li>
+              <a href={`${baseUrl}${docsUrl}/javascript/callbacks`}>
+                Callbacks
+              </a>
+            </li>
+            <li>
               <a href={`${baseUrl}${docsUrl}/javascript/destructuring`}>
                 Destructuring
               </a>

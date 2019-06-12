@@ -4,6 +4,7 @@
       "javascript/index",
       "javascript/objects",
       "javascript/prototypes",
+      "javascript/callbacks",
       "javascript/destructuring",
       "javascript/spread-operator"
     ],
