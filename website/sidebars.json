@@ -5,6 +5,7 @@
       "javascript/objects",
       "javascript/prototypes",
       "javascript/callbacks",
+      "javascript/promises",
       "javascript/destructuring",
       "javascript/spread-operator"
     ],

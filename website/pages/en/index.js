@@ -209,6 +209,9 @@ class Index extends React.Component {
               </a>
             </li>
             <li>
+              <a href={`${baseUrl}${docsUrl}/javascript/promises`}>Promises</a>
+            </li>
+            <li>
               <a href={`${baseUrl}${docsUrl}/javascript/destructuring`}>
                 Destructuring
               </a>

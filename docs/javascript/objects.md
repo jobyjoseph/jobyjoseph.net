@@ -1,6 +1,6 @@
 ---
 id: objects
-title: Objects Basics
+title: Objects
 ---
 
 An **object** is a collection of related data and/or functionality. In the following code, `car` is an example of _object_ in JavaScript.
