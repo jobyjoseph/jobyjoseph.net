@@ -126,3 +126,17 @@ We saw earlier how Promises are resolved. W
 ## Multiple `resolve()` Invocation
 
 ## Invoking Order for `.then()` and `.catch()`
+
+## Chaining Promises
+
+We saw that if a Promise is resolved, `.then()` is triggered. `.then()` also returns a Promise object on which we can access the `.then()` again. So the pseudocode looks like:
+
+```
+wait of something to finish
+  then do some task until finish
+  then do some other task until finish
+  ...
+catch error at any steps
+```
+
+This is called chaining of promises. It allows a sequential flow control.
