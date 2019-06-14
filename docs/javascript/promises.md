@@ -121,7 +121,11 @@ The difference is only in the syntax. Internally `.catch()` calls `.then()` and 
 
 ## Passing Data in `resolve()` or `reject()`
 
-We saw earlier how Promises are resolved. W
+Say we are using promises to fetch data from an API. For demo purpose let us take a public API available on web. Anyone can search for users in Github using their public API. There is no signup process. Here is the API link to search for `jobyjoseph` in users.
+
+```
+https://api.github.com/search/users?q=jobyjoseph
+```
 
 ## Multiple `resolve()` Invocation
 
