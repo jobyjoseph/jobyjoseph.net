@@ -18,3 +18,5 @@ Here is a collection of JavaScript questions that can help you prepare for an in
 **Make a generic method for adding numbers. It can be `sum(1, 2, 3)` or `sum(1)(2, 3)` or `sum(1)(2)(3)`**
 
 **What is a `prototype` in JavaScript? Is it an object, function or something else?**
+
+`prototype` is a property in JavaScript constructor function. The `property` object contains properties and methods which are inherited by instance objects.
